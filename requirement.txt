@@ -1,0 +1,10 @@
+#requirement libries
+
+python
+pandas
+numpy
+matplotlib
+seaborn
+scikit-learn
+ploty
+scipy
