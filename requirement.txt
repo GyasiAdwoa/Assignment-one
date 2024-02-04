@@ -1,6 +1,6 @@
 #requirement libries
 
-python
+python==3.9.9
 pandas
 numpy
 matplotlib
