@@ -5,7 +5,6 @@ from enum import Enum
 
 class Dataset(Enum):
     CUSTOMERS = "olist_customers_dataset.csv"
-    GEOLOCATION = "olist_geolocation_dataset.csv"
     ORDER_ITEMS = "olist_order_items_dataset.csv"
     ORDER_PAYMENTS = "olist_order_payments_dataset.csv"
     ORDER_REVIEWS = "olist_order_reviews_dataset.csv"
@@ -18,7 +17,8 @@ class Dataset(Enum):
 
 def fetch_data(dataset: Dataset, output_filename: str):
     print(f"Reading dataset: {dataset.value}")
-    file_path = os.path.join("C:\Users\HP USER\Downloads\Assignment-one-1\Feature-pipeline\dataset_ALL", dataset.value)  # Update the path to your dataset directory
+    dataset_folder = "C:/Users/HP USER/Downloads/Assignment-one-1/Feature-pipeline/dataset_ALL"
+    file_path = os.path.join(dataset_folder, dataset.value)
     if not os.path.exists(file_path):
         raise FileNotFoundError(f"File '{file_path}' not found.")
     
@@ -30,11 +30,12 @@ def fetch_data(dataset: Dataset, output_filename: str):
     print("Done")
 
 if __name__ == "__main__":
-    fetch_data(Dataset.CUSTOMERS, "olist_customers_dataset.csv")
-    fetch_data(Dataset.GEOLOCATION, "geolocation.csv")
-    fetch_data(Dataset.ORDER_ITEMS, "order_items.csv")
-    fetch_data(Dataset.ORDER_PAYMENTS, "order_payments.csv")
-    fetch_data(Dataset.ORDER_REVIEWS, "order_reviews.csv")
-    fetch_data(Dataset.ORDERS, "orders.csv")
-    fetch_data(Dataset.PRODUCTS, "products.csv")
-    fetch_data(Dataset.SELLERS, "sellers.csv")
+    output_folder = "output_folder"  # Specify the output folder where you want to save the fetched CSV files
+
+    # Ensure the output folder exists
+    os.makedirs(output_folder, exist_ok=True)
+
+    # Fetch all CSV files in the dataset folder
+    for dataset in Dataset:
+        output_filename = os.path.join(output_folder, dataset.value)
+        fetch_data(dataset, output_filename)
